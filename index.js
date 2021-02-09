@@ -6,6 +6,11 @@ const StringDecoder = require ('string_decoder').StringDecoder;
 
 const config = require('./config');
 
+const _data = require('./lib/data');
+
+_data.delete('test','newfile',(err,data)=>{
+   console.log('this was the err',err ,data);
+})
 
 //for http
 
