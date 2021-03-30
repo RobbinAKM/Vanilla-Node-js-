@@ -1,22 +1,34 @@
+
+// Dependencies
 var server = require('./lib/server');
 var workers = require('./lib/workers');
 var cli = require('./lib/cli');
 
-var app= {};
+// Declare the app
+var app = {};
 
-app.init= function(){
+// Init function
+app.init = function(callback){
 
-server.init();
+ // Start the server
+ server.init();
 
-workers.init();
+ // Start the workers
+ workers.init();
 
-// Start the CLI, but make sure it starts last
-setTimeout(function(){
-  cli.init();
-},50);
+ // Start the CLI, but make sure it starts last
+ setTimeout(function(){
+   cli.init();
+   callback();
+ },50);
 
 };
 
-app.init();
+// Self invoking only if required directly
+if(require.main === module){
+ app.init(function(){});
+}
 
-module.exports = app ;
+
+// Export the app
+module.exports = app;
